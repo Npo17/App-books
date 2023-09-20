@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tu Página Principal</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            background-image: url("{{ url_for('static', filename='imagen-fondo-home.jpg') }}");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: white; /* Texto en blanco */
+        }
+        .main-content {
+            text-align: center;
+            padding: 80px 0; /* Ajustar el espaciado superior e inferior */
+            min-height: calc(100vh - 120px); /* Altura mínima del contenido principal */
+        }
+        .btn-calculate {
+            background-color: #D2B48C; /* Cambiar el color de fondo a marrón claro */
+            color: black; /* Cambiar el color del texto a negro */
+            padding: 10px 20px;
+            font-size: 18px;
+            text-decoration: none;
+            border: 2px solid black; /* Agregar un borde negro */
+            border-radius: 5px;
+            display: block; /* Convertir el botón en un bloque */
+            margin: 10px auto; /* Centrar los botones horizontalmente y agregar espacio vertical */
+        }
+        footer {
+            background-color: rgba(0, 0, 0, 0.8); /* Fondo semi-transparente */
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+        /* Estilos para el texto deseado */
+        .welcome-text {
+            color: black; /* Cambiar a color negro */
+            /* O puedes agregar un borde negro */
+            /* border: 2px solid black; */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <!-- Barra de navegación -->
+            <ul>
+                {% if current_user.is_authenticated %}
+                <li><a href="{{ url_for('logout') }}">Cerrar Sesión</a></li>
+                {% else %}
+                <li><a href="{{ url_for('login') }}">Volver al Login</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+
+    <section class="main-content">
+        <!-- Contenido principal de tu página -->
+        <h1 class="welcome-text">Bienvenido a su home ¿Qué deseas hacer?</h1>
+        <a href="{{ url_for('buy_book') }}" class="btn-calculate">Comprar un Libro</a>
+        <a href="{{ url_for('sell_book') }}" class="btn-calculate">Vender un Libro</a>
+    </section>
+
+    <footer>
+        <!-- Pie de página -->
+        <p>&copy; 2023 Tu Sitio de Streaming</p>
+    </footer>
+</body>
+</html>
